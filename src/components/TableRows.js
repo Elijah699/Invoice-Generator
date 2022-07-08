@@ -1,10 +1,27 @@
 // import { useState } from 'react';
 
 // styles
-import { InputCon } from '../styles/InvoiceModal.styles';
+import styled from 'styled-components';
 
 // icons
 import bin from '../assets/icon-delete.svg';
+
+
+
+const InputCon = styled.input`
+  width: 100%;
+  background-color: ${({ theme }) => theme.inputbg};
+  color: ${({ theme }) => theme.texttest};
+  border-radius: 4px;
+  padding: 12px 4px;
+  border: none;
+  margin-bottom: 24px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 
 const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
   // const [itemName, setItemName] = useState('');

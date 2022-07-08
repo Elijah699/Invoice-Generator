@@ -1,12 +1,23 @@
 import React from "react";
 import { func, string } from 'prop-types';
+import styled from "styled-components";
 
-// styles
-import { Button, TogglerImg } from "../styles/TogglerButton.styles";
 
 // icons
 import sunicon from '../assets/icons8-sun.svg';
 import moonicon from '../assets/icon-moon.svg';
+
+// styles
+const Button = styled.button`
+  background: #1e2139;
+  border: none;
+  cursor: pointer;
+`;
+
+const TogglerImg = styled.img`
+  width: auto;
+`;
+
 
 
 const Toggle = ({theme, toggleTheme}) => {

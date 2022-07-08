@@ -1,6 +1,6 @@
 import React from 'react';
 // import { string } from 'prop-types'
-import { useDarkMode } from './useDarkMode';
+// import { useDarkMode } from './useDarkMode';
 import Toggle from './Toggler';
 
 // icons
@@ -14,8 +14,8 @@ import {
   HeaderToggler,
 } from '../styles/Header.styles';
 
-const Header = () => {
-  const [theme, themeToggler] = useDarkMode();
+const Header = ({theme, themeToggler}) => {
+  // const [theme, themeToggler] = useDarkMode();
 
   return (
     <HeaderWrapper>

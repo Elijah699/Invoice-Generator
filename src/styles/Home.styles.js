@@ -85,6 +85,7 @@ export const ArrowDown = styled.img`
 
 
 export const FilterMenu = styled.ul`
+  display: none;
   padding: 0;
   list-style-type: none;
   position: absolute;
@@ -93,6 +94,10 @@ export const FilterMenu = styled.ul`
   background: ${({ theme }) => theme.inputbg};
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    &.active {
+      display: block;
+    }
 `;
 
 
@@ -123,6 +128,10 @@ export const NewInvoice = styled.button`
   color: #fff;
   cursor: pointer;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 

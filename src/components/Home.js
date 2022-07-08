@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InvoiceModal from '../components/InvoiceModal';
+import CreateInvoice from '../components/CreateInvoice';
 import {
   HomeWrapper,
   HomeNav,
@@ -25,10 +25,16 @@ import plus from '../assets/icon-plus.svg';
 const Home = () => {
   // const emptyInvoice = ''
   const [active, setActive] = useState(false);
+  const [filter, setFilter] = useState(false);
 
   const toggleModal = () => {
     setActive(!active);
   }
+
+  const toggleFilter = () => {
+    setFilter(!filter);
+  }
+
   return (
     <HomeWrapper>
       <HomeNav>
@@ -42,11 +48,11 @@ const Home = () => {
 
         <HomeNavRight>
           <FilterDiv>
-            <Filter>
+            <Filter onClick={toggleFilter}>
               Filter <SmNone>by status </SmNone>{' '}
               <ArrowDown src={arrowdown} alt="arrow_down" />{' '}
             </Filter>
-            <FilterMenu>
+            <FilterMenu className={filter ? 'active' : ''}>
               <FilterItem>Draft</FilterItem>
               <FilterItem>Pending</FilterItem>
               <FilterItem>Paid</FilterItem>
@@ -64,7 +70,7 @@ const Home = () => {
           </InvoiceBtnDiv>
         </HomeNavRight>
       </HomeNav>
-      <InvoiceModal active={active} setActive={toggleModal} />
+      <CreateInvoice active={active} setActive={toggleModal} />
     </HomeWrapper>
   );
 };

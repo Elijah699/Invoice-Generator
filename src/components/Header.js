@@ -1,6 +1,5 @@
 import React from 'react';
-// import { string } from 'prop-types'
-// import { useDarkMode } from './useDarkMode';
+import { NavLink } from 'react-router-dom';
 import Toggle from './Toggler';
 
 // icons
@@ -14,13 +13,15 @@ import {
   HeaderToggler,
 } from '../styles/Header.styles';
 
-const Header = ({theme, themeToggler}) => {
+const Header = ({ theme, themeToggler }) => {
   // const [theme, themeToggler] = useDarkMode();
 
   return (
     <HeaderWrapper>
       <HeaderBrand>
-        <HeaderImg src={logo} alt="Brand_Image" />
+        <NavLink to="/">
+          <HeaderImg src={logo} alt="Brand_Image" />
+        </NavLink>
       </HeaderBrand>
       <HeaderToggler>
         <Toggle theme={theme} toggleTheme={themeToggler} />
@@ -32,6 +33,5 @@ const Header = ({theme, themeToggler}) => {
 // Header.propTypes = {
 //     themeMode: string.isRequired
 // }
-
 
 export default Header;

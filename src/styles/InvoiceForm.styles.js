@@ -1,5 +1,27 @@
 import styled from 'styled-components';
 
+export const StyledModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  /* display: none; */
+  /* margin-left: -100vw; */
+  margin: 0;
+  transition: 0.9s;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* &.active {
+    display: block;
+    margin: 0;
+  } */
+`;
+
 export const FormWrapper = styled.form`
   position: relative;
   left: 50px;
@@ -7,7 +29,7 @@ export const FormWrapper = styled.form`
   max-width: 650px;
   width: 100%;
   background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.texttest};
+  color: ${({ theme }) => theme.generaltext};
   box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
@@ -37,7 +59,7 @@ export const FormWrapper = styled.form`
   input {
     width: 100%;
     background-color: ${({ theme }) => theme.inputbg};
-    color: ${({ theme }) => theme.texttest};
+    color: ${({ theme }) => theme.generaltext};
     border-radius: 4px;
     padding: 12px 4px;
     border: none;
@@ -64,7 +86,7 @@ export const FormWrapper = styled.form`
       select {
         width: 100%;
         background-color: ${({ theme }) => theme.inputbg};
-        color: ${({ theme }) => theme.texttest};
+        color: ${({ theme }) => theme.generaltext};
         border-radius: 4px;
         padding: 12px 4px;
         border: none;
@@ -165,13 +187,23 @@ export const FormWrapper = styled.form`
 
   @media (max-width: 768px) {
     left: 0;
-    padding: 70px 10px 10px;
-    width: 100%;
+    padding: 70px 25px 10px;
+    width: auto;
     max-width: 100%;
   }
 
   @media (max-width: 576px) {
     width: auto;
+    padding: 70px 10px 10px;
+
+    .billFrom,
+    .billTo,
+    .work-item,
+    .desc,
+    .actionBtn,
+    .date {
+      padding: 0 10px;
+    }
   }
 `;
 
@@ -194,16 +226,16 @@ export const Btn = styled.button`
 `;
 
 export const RedBtn = styled(Btn)`
-  color: ${({ theme }) => theme.texttest};
+  color: ${({ theme }) => theme.generaltext};
   background-color: #ec5757;
 `;
 
 export const PurpleBtn = styled(Btn)`
-  color: ${({ theme }) => theme.texttest};
+  color: ${({ theme }) => theme.generaltext};
   background-color: #7c5dfa;
 `;
 
 export const GreenBtn = styled(Btn)`
-  color: ${({ theme }) => theme.texttest};
+  color: ${({ theme }) => theme.generaltext};
   background-color: #33d69f;
 `;

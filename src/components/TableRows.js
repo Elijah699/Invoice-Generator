@@ -11,7 +11,7 @@ import bin from '../assets/icon-delete.svg';
 const InputCon = styled.input`
   width: 100%;
   background-color: ${({ theme }) => theme.inputbg};
-  color: ${({ theme }) => theme.texttest};
+  color: ${({ theme }) => theme.generaltext};
   border-radius: 4px;
   padding: 12px 4px;
   border: none;
@@ -46,7 +46,9 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
   return (
 
     rowsData.map((data, index) => {
-        const {itemName, qty, price} = data;
+        const { itemName, qty, price} = data;
+        console.log(index);
+        console.log(data);
         return (
           <tr className="table-items" key={index}>
             <td className="item-name">
@@ -54,7 +56,7 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
                 name="itemName"
                 value={itemName}
                 type="text"
-                onChange={(evnt)=>(handleChange(index, evnt))}
+                onChange={(evnt) => handleChange(index, evnt)}
               />
             </td>
             <td className="qty">
@@ -62,7 +64,7 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
                 name="qty"
                 value={qty}
                 type="text"
-                onChange={(evnt)=>(handleChange(index, evnt))}
+                onChange={(evnt) => handleChange(index, evnt)}
               />
             </td>
             <td className="price">
@@ -70,11 +72,19 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
                 name="price"
                 value={price}
                 type="text"
-                onChange={(evnt)=>(handleChange(index, evnt))}
+                onChange={(evnt) => handleChange(index, evnt)}
               />
             </td>
-            <td  className="total">{qty * price}</td>
-            <img src={bin} onClick={()=>(deleteTableRows(index))} alt="delete-icon" />
+            <td
+              className="total"
+            >
+              {qty * price}
+            </td>
+            <img
+              src={bin}
+              onClick={() => deleteTableRows(index)}
+              alt="delete-icon"
+            />
           </tr>
         );
     })

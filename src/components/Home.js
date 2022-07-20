@@ -1,76 +1,82 @@
-import React, { useState } from 'react';
-import CreateInvoice from '../components/CreateInvoice';
-import {
-  HomeWrapper,
-  HomeNav,
-  HomeNavLeft,
-  HomeTitle,
-  HomeTitleSpan,
-  SmNone,
-  HomeNavRight,
-  FilterDiv,
-  Filter,
-  FilterMenu,
-  FilterItem,
-  ArrowDown,
-  InvoiceBtnDiv,
-  NewInvoice,
-  PlusSpan,
-} from '../styles/Home.styles';
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import InvoicesContext from '../context/InvoicesContext';
+import _ from 'lodash';
+import InvoiceCard from './InvoiceCard';
+
+// style
+import { HomeWrapper } from '../styles/Home.styles';
 
 // icons
 import arrowdown from '../assets/icon-arrow-down.svg';
 import plus from '../assets/icon-plus.svg';
+import emptyIllustration from '../assets/illustration-empty.svg';
 
 const Home = () => {
-  // const emptyInvoice = ''
-  const [active, setActive] = useState(false);
-  const [filter, setFilter] = useState(false);
+  const { invoices, setInvoices } = useContext(InvoicesContext);
 
-  const toggleModal = () => {
-    setActive(!active);
-  }
+  const InvoicesNum = invoices.length;
+
+  const [filter, setFilter] = useState(false);
 
   const toggleFilter = () => {
     setFilter(!filter);
-  }
+  };
 
   return (
     <HomeWrapper>
-      <HomeNav>
-        <HomeNavLeft>
-          <HomeTitle>Invoices</HomeTitle>
-          <HomeTitleSpan>
-            <SmNone>There are </SmNone>
-            <span>4</span> total invoices
-          </HomeTitleSpan>
-        </HomeNavLeft>
+      <div className="home-nav">
+        <div className="home-nav-left">
+          <h1 className="home-title">Invoices</h1>
+          <span className="home-title-span">
+            <span className="sm-none">There are </span>
+            <span>{InvoicesNum}</span> total invoices
+          </span>
+        </div>
 
-        <HomeNavRight>
-          <FilterDiv>
-            <Filter onClick={toggleFilter}>
-              Filter <SmNone>by status </SmNone>{' '}
-              <ArrowDown src={arrowdown} alt="arrow_down" />{' '}
-            </Filter>
-            <FilterMenu className={filter ? 'active' : ''}>
-              <FilterItem>Draft</FilterItem>
-              <FilterItem>Pending</FilterItem>
-              <FilterItem>Paid</FilterItem>
-              <FilterItem>All</FilterItem>
-            </FilterMenu>
-          </FilterDiv>
+        <div className="home-nav-right">
+          <div className="filter-div">
+            <div className="filter" onClick={toggleFilter}>
+              Filter <span className="sm-none">by status </span>{' '}
+              <img src={arrowdown} alt="arrow_down" />{' '}
+            </div>
+            <ul className={filter ? 'active' : ''}>
+              <li>Draft</li>
+              <li>Pending</li>
+              <li>Paid</li>
+              <li>All</li>
+            </ul>
+          </div>
 
-          <InvoiceBtnDiv>
-            <NewInvoice onClick={toggleModal}>
-              <PlusSpan>
-                <img src={plus} alt="plus" />
-              </PlusSpan>{' '}
-              New <SmNone>invoice</SmNone>
-            </NewInvoice>
-          </InvoiceBtnDiv>
-        </HomeNavRight>
-      </HomeNav>
-      <CreateInvoice active={active} setActive={toggleModal} />
+          <div className="inv-btn-div">
+            <Link to="/create-invoice">
+              <button className="new-inv">
+                <span className="plus-icon">
+                  <img src={plus} alt="plus" />
+                </span>{' '}
+                New <span className="sm-none">invoice</span>
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="invoice-item">
+        {!_.isEmpty(invoices) ? (
+          invoices.map((invoice) => (
+            <InvoiceCard key={invoice.id} {...invoice} />
+          ))
+        ) : (
+          <div className="empty">
+            <img src={emptyIllustration} alt="illustration-empty" />
+            <h3>There is nothing here</h3>
+            <p>
+              Create a new invoice by clicking the New Invoice button and get
+              started.
+            </p>
+          </div>
+        )}
+      </div>
     </HomeWrapper>
   );
 };

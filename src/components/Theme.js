@@ -1,25 +1,29 @@
 export const lightTheme = {
   background: '#F8F7FC',
-  texttest: '#000',
-  duedatetext: '#ECEDF1',
+  generaltext: '#000',
+  // duedatetext: '#ECEDF1',
   dueamounttext: '#5A5B5D',
   h3color: '#000',
   inputbg: '#FFFFFF',
   inputtext: '#000000',
   h4color: '#7c5dfa',
+  cardbg: '#FFFFFD',
   totalbg: '#373B54',
+  duecolor: '#a6aabe'
 };
 
 export const darkTheme = {
   background: '#141625',
-  texttest: '#fff',
-  duedatetext: '#656780',
+  generaltext: '#fff',
+  // duedatetext: '#656780',
   dueamounttext: '#D2D5E3',
   h3color: '#777f98', //Item list
   inputbg: '#1e2139',
   inputtext: '#FFFFFF',
   h4color: '#7c5dfa', //Bill To, Bill From
+  cardbg: '#1F213A',
   totalbg: '#0B0E15',
+  duecolor: '#a6aabe'
 };
 
 
@@ -33,26 +37,7 @@ export const darkTheme = {
 // red: #ec5757
 // green: #33d69f
 // orange: #ff8f00
-// paid {
-//   &::before {
-//     background-color: #33d69f;
-//   }
-//   color: #33d69f;
-//   background-color: rgba(51, 214, 160, 0.1);
-// }
-// .pending {
-//   &::before {
-//     background-color: #ff8f00;
-//   }
-//   color: #ff8f00;
-//   background-color: rgba(255, 145, 0, 0.1);
-// }
-// .draft {
-//   &::before {
-//     background-color: #dfe3fa;
-//   }
-//   color: #dfe3fa;
-//   background-color: rgba(223, 227, 250, 0.1);
+
 
 
 

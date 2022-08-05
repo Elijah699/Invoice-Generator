@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_ITEMLIST, REMOVE_FROM_ITEMLIST } from '../redux/Reducer';
 
 import TableRows from './TableRows';
 
@@ -16,6 +18,11 @@ import {
 import plus from '../assets/icon-plus.svg';
 
 const InvoiceForm = ({ invProp, handleOnSubmit }) => {
+
+  const items = useSelector((state) => state.invItem.invItemList)
+  console.log(items);
+  const dispatch = useDispatch();
+
   const [invoice, setInvoice] = useState(() => {
     return {
       billerStreet: invProp ? invProp.billerStreet : '',
@@ -50,7 +57,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     proDesc,
   } = invoice;
 
-  // =======Date =======
+  // ======= date handler =======
   const dateOptions = { day: 'numeric', month: 'numeric', year: 'numeric' };
 
   const invoiceDate = new Date(Date.now()).toLocaleDateString(
@@ -62,7 +69,8 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     Date.now() + `${payTerm}` * 24 * 60 * 60 * 1000
   ).toLocaleDateString('en-GB', dateOptions);
 
-  // ======= End of date handlers =======
+  // ======= end of date handler =======
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -72,6 +80,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
       [name]: value,
     }));
   };
+
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -94,7 +103,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
       invoiceDueDate,
       payTerm,
       proDesc,
-      invItemList: [],
+      invItemList: items,
       invTotal: 0,
       invPending: true,
       invDraft: false,
@@ -102,12 +111,18 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     };
 
     handleOnSubmit(invoice);
-    console.log(invoice);
+    // console.log(invoice);
   };
 
   // ======= Add Item handlers =======
   // Table
   const [rowsData, setRowsData] = useState([]);
+
+
+  const handleItemData = (data) => {
+    console.log(data);
+      // dispatch(ADD_TO_ITEMLIST(data));
+  }
 
   const addTableRows = () => {
     const rowsInput = {
@@ -118,20 +133,26 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     setRowsData([...rowsData, rowsInput]);
   };
 
+  
+
   const deleteTableRows = (index) => {
     const rows = [...rowsData];
     rows.splice(index, 1);
     setRowsData(rows);
+
+    // const dispatchfunction = () => dispatch(REMOVE_FROM_ITEMLIST());
+    // dispatchfunction();
   };
+
+
 
   const handleChange = (index, evnt) => {
     const { name, value } = evnt.target;
     const rowsInput = [...rowsData];
     rowsInput[index][name] = value;
     setRowsData(rowsInput);
-
-    // console.log(rowsInput)
   };
+
   // ====== End of Add Item handler =======
 
   return (
@@ -150,7 +171,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
               value={billerStreet}
               type="text"
               onChange={handleInputChange}
-              // (e) => setBillerStreet(e.target.value)
               required
             />
           </div>
@@ -163,7 +183,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={billerCity}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setBillerCity(e.target.value)
                 required
               />
             </div>
@@ -174,7 +193,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={billerZip}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setBillerZip(e.target.value)
                 required
               />
             </div>
@@ -185,7 +203,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={billerCountry}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setBillerCountry(e.target.value)
                 required
               />
             </div>
@@ -202,7 +219,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
               value={clientName}
               type="text"
               onChange={handleInputChange}
-              // (e) => setClientName(e.target.value)
               required
             />
           </div>
@@ -213,7 +229,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
               value={clientEmail}
               type="email"
               onChange={handleInputChange}
-              // (e) => setClientEmail(e.target.value)
               required
             />
           </div>
@@ -224,7 +239,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
               value={clientStreet}
               type="text"
               onChange={handleInputChange}
-              // (e) => setClientStreet(e.target.value)
               required
             />
           </div>
@@ -237,7 +251,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={clientCity}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setClientCity(e.target.value)
                 required
               />
             </div>
@@ -248,7 +261,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={clientZip}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setClientZip(e.target.value)
                 required
               />
             </div>
@@ -259,7 +271,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={clientCountry}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setClientCountry(e.target.value)
                 required
               />
             </div>
@@ -286,7 +297,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                   value={invoiceDueDate}
                   disabled
                   type="text"
-                  // onChange={handleInputData}
                 />
               </div>
             </div>
@@ -299,7 +309,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 name="payTerm"
                 value={payTerm}
                 onChange={handleInputChange}
-                // (e) => setPayTerm(e.target.value)
                 required
               >
                 <option value={30}>Next 30 Days</option>
@@ -316,7 +325,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                 value={proDesc}
                 type="text"
                 onChange={handleInputChange}
-                // (e) => setProDesc(e.target.value)
                 required
               />
             </div>
@@ -339,6 +347,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
                   rowsData={rowsData}
                   deleteTableRows={deleteTableRows}
                   handleChange={handleChange}
+                  // handleItemData={handleItemData}
                 />
               </tbody>
             </table>

@@ -11,6 +11,7 @@ import InvoicesContext from './context/InvoicesContext';
 import Header from './components/Header';
 import Home from './components/Home';
 import CreateInvoice from './pages/CreateInvoice';
+import ViewInvoice from './components/ViewInvoice';
 import EditInvoice from './pages/EditInvoice';
 
 const App = () => {
@@ -29,6 +30,8 @@ const App = () => {
             <Route path="/" index element={<Home />} />
 
             <Route path="create-invoice" element={<CreateInvoice />} />
+
+            <Route path='view-invoice/:id' element={<ViewInvoice />} />
 
             <Route path="edit-invoice/:id" element={<EditInvoice />} />
 

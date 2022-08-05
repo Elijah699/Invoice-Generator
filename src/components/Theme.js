@@ -9,7 +9,10 @@ export const lightTheme = {
   h4color: '#7c5dfa',
   cardbg: '#FFFFFD',
   totalbg: '#373B54',
-  duecolor: '#a6aabe'
+  duecolor: '#a6aabe',
+  sectext: '#D7D7E0',
+  viewmenu: '#FFFFFF',
+  viewitembg: '#F9FAFE',
 };
 
 export const darkTheme = {
@@ -23,7 +26,10 @@ export const darkTheme = {
   h4color: '#7c5dfa', //Bill To, Bill From
   cardbg: '#1F213A',
   totalbg: '#0B0E15',
-  duecolor: '#a6aabe'
+  duecolor: '#a6aabe',
+  sectext: '#575B78',
+  viewmenu: '#1F213A',
+  viewitembg: '#252945',
 };
 
 

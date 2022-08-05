@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const CreateInvoice = ({ history }) => {
+const CreateInvoice = () => {
   const { invoices, setInvoices } = useContext(InvoicesContext);
   let navigate = useNavigate();
 
 
 
   const handleOnSubmit = (invoice) => {
-    console.log(invoice);
+    // console.log(invoice);
     setInvoices([ invoice, ...invoices ]);
     navigate('/');
   }

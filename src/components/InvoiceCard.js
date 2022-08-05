@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 // styles
 import { InvoiceCardWrapper } from '../styles/InvoiceCard.styles';
 
@@ -11,9 +13,11 @@ const InvoiceCard = ({
   invPending,
   invTotal,
 }) => {
-  console.log(id, invoiceDueDate, invPending);
+  // console.log(id, invoiceDueDate, invPending);
+  const navigate = useNavigate();
+
   return (
-    <InvoiceCardWrapper>
+    <InvoiceCardWrapper onClick={() => navigate(`view-invoice/${id}`)}>
       <div className="flex-left">
         <span className="track-id"># {id}</span>
         <span className="date-due">{invoiceDueDate}</span>

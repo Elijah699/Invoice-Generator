@@ -6,20 +6,12 @@ export const StyledModal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  /* display: none; */
-  /* margin-left: -100vw; */
   margin: 0;
   transition: 0.9s;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* &.active {
-    display: block;
-    margin: 0;
-  } */
 `;
 
 export const FormWrapper = styled.form`

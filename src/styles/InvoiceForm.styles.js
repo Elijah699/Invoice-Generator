@@ -103,6 +103,57 @@ export const FormWrapper = styled.form`
     .right {
       float: right;
     }
+
+    @media (max-width: 576px) {
+      display: none;
+    }
+  }
+
+  .m-actionBtn {
+    display: none;
+
+    @media (max-width: 576px) {
+      display: block;
+      margin-top: 60px;
+      margin-bottom: 25px;
+
+      .flex {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .create {
+        margin-top: 20px;
+        text-align: center;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .edit-actionBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    width: 100%;
+
+    @media (max-width: 576px) {
+      display: none;
+    }
+  }
+
+  .m-edit-actionBtn {
+    display: none;
+
+    @media (max-width: 576px) {
+      display: block;
+      margin-top: 40px;
+      margin-bottom: 25px;
+      margin-left: 5px;
+    }
   }
 
   .add-item-btn {
@@ -187,6 +238,11 @@ export const FormWrapper = styled.form`
   @media (max-width: 576px) {
     width: auto;
     padding: 70px 10px 10px;
+
+    h1 {
+      padding-top: 10px;
+      font-size: 20px;
+    }
 
     .billFrom,
     .billTo,

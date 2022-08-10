@@ -10,7 +10,8 @@ export const lightTheme = {
   cardbg: '#FFFFFD',
   totalbg: '#373B54',
   duecolor: '#a6aabe',
-  sectext: '#D7D7E0',
+  sectext: '#b4b4b2',
+  // 5f5f5c
   viewmenu: '#FFFFFF',
   viewitembg: '#F9FAFE',
 };
@@ -27,7 +28,8 @@ export const darkTheme = {
   cardbg: '#1F213A',
   totalbg: '#0B0E15',
   duecolor: '#a6aabe',
-  sectext: '#575B78',
+  sectext: '#888eb0',
+  // #575B78
   viewmenu: '#1F213A',
   viewitembg: '#252945',
 };

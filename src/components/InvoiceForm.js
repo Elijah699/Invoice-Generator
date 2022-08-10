@@ -1,26 +1,26 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_ITEMLIST, REMOVE_FROM_ITEMLIST } from '../redux/Reducer';
 
 import TableRows from './TableRows';
+import NewInvoiceBtn from './NewInvoiceBtn';
+import EditInvoiceBtn from './EditInvoiceBtn';
 
 // styles
 import {
   StyledModal,
-  FormWrapper,
-  GreenBtn,
-  PurpleBtn,
-  RedBtn,
+  FormWrapper
 } from '../styles/InvoiceForm.styles';
 
 // icons
 import plus from '../assets/icon-plus.svg';
 
-const InvoiceForm = ({ invProp, handleOnSubmit }) => {
+const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
+  const invoiceTitle = title === 'New Invoice';
 
-  const items = useSelector((state) => state.invItem.invItemList)
+  const items = useSelector((state) => state.invItem.invItemList);
   console.log(items);
+  
   const dispatch = useDispatch();
 
   const [invoice, setInvoice] = useState(() => {
@@ -71,7 +71,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
 
   // ======= end of date handler =======
 
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -80,7 +79,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
       [name]: value,
     }));
   };
-
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -118,11 +116,10 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
   // Table
   const [rowsData, setRowsData] = useState([]);
 
-
   const handleItemData = (data) => {
     console.log(data);
-      // dispatch(ADD_TO_ITEMLIST(data));
-  }
+    // dispatch(ADD_TO_ITEMLIST(data));
+  };
 
   const addTableRows = () => {
     const rowsInput = {
@@ -133,8 +130,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     setRowsData([...rowsData, rowsInput]);
   };
 
-  
-
   const deleteTableRows = (index) => {
     const rows = [...rowsData];
     rows.splice(index, 1);
@@ -143,8 +138,6 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
     // const dispatchfunction = () => dispatch(REMOVE_FROM_ITEMLIST());
     // dispatchfunction();
   };
-
-
 
   const handleChange = (index, evnt) => {
     const { name, value } = evnt.target;
@@ -158,7 +151,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
   return (
     <StyledModal>
       <FormWrapper onSubmit={submitForm}>
-        <h1>New Invoice</h1>
+        <h1>{title}</h1>
 
         {/* Bill From */}
         <div className="billFrom">
@@ -363,20 +356,7 @@ const InvoiceForm = ({ invProp, handleOnSubmit }) => {
           </div>
         </div>
 
-        {/* Save/Print/Exit */}
-        <div className="actionBtn">
-          <div>
-            <Link to="/">
-              <RedBtn type="button">Cancel</RedBtn>
-            </Link>
-          </div>
-          <div>
-            <div className="right">
-              <PurpleBtn>Save Draft</PurpleBtn>
-              <GreenBtn type="submit">Create Invoice</GreenBtn>
-            </div>
-          </div>
-        </div>
+       {invoiceTitle ? <NewInvoiceBtn submitText={submitText} /> : <EditInvoiceBtn submitText={submitText} />}
       </FormWrapper>
     </StyledModal>
   );

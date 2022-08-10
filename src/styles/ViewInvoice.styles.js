@@ -10,16 +10,50 @@ export const ViewInvoiceWrapper = styled.div`
     text-decoration: none;
   }
 
+  .m-menu {
+    display: none;
+  }
+
+  .btn {
+    cursor: pointer;
+    font-size: 12px;
+    border: none;
+    margin-right: 8px;
+    border-radius: 30px;
+    padding: 16px 24px;
+
+    &:focus {
+      outline: none;
+    }
+
+    @media (max-width: 576px) {
+      margin-right: 6px;
+      padding: 13px 20px;
+    }
+  }
+
+  .edit {
+    background-color: #252945;
+    color: #e7e8f0;
+  }
+
+  .delete {
+    color: ${({ theme }) => theme.generaltext};
+    background-color: #ec5757;
+  }
+
+  .mark-paid {
+    color: ${({ theme }) => theme.generaltext};
+    background-color: #7c5dfa;
+  }
+
+  .print {
+    color: ${({ theme }) => theme.generaltext};
+    background-color: #33d69f;
+  }
+
   .back {
     color: ${({ theme }) => theme.generaltext};
-  }
-
-  .main {
-    color: ${({ theme }) => theme.generaltext};
-  }
-
-  .sec {
-    color: ${({ theme }) => theme.sectext};
   }
 
   .flex {
@@ -85,44 +119,6 @@ export const ViewInvoiceWrapper = styled.div`
     .right {
       flex: 1;
       justify-content: flex-end;
-
-      .btn {
-        cursor: pointer;
-        font-size: 12px;
-        border: none;
-        margin-right: 8px;
-        border-radius: 30px;
-        padding: 16px 24px;
-
-        &:focus {
-          outline: none;
-        }
-
-        @media (max-width: 576px) {
-          margin-right: 6px;
-          padding: 13px 20px;
-        }
-      }
-
-      .edit {
-        background-color: #252945;
-        color: #e7e8f0;
-      }
-
-      .delete {
-        color: ${({ theme }) => theme.generaltext};
-        background-color: #ec5757;
-      }
-
-      .mark-paid {
-        color: ${({ theme }) => theme.generaltext};
-        background-color: #7c5dfa;
-      }
-
-      .print {
-        color: ${({ theme }) => theme.generaltext};
-        background-color: #33d69f;
-      }
     }
   }
 
@@ -138,19 +134,20 @@ export const ViewInvoiceWrapper = styled.div`
       }
 
       .col-left {
-        font-size: 12px;
-
         p:first-child {
           font-size: 20px;
           text-transform: uppercase;
           margin-bottom: 5px;
+          color: ${({ theme }) => theme.generaltext};
         }
 
         p:nth-child(2) {
           font-size: 16px;
+          color: ${({ theme }) => theme.sectext};
         }
 
         span {
+          font-size: 12px;
           color: #888eb0;
         }
       }
@@ -159,6 +156,7 @@ export const ViewInvoiceWrapper = styled.div`
         font-size: 12px;
         align-items: flex-end;
         text-align: end;
+        color: ${({ theme }) => theme.sectext};
       }
     }
 
@@ -174,6 +172,7 @@ export const ViewInvoiceWrapper = styled.div`
         font-size: 12px;
         font-weight: 400;
         margin-bottom: 10px;
+        color: ${({ theme }) => theme.sectext};
       }
 
       .payment,
@@ -182,17 +181,23 @@ export const ViewInvoiceWrapper = styled.div`
       }
 
       .bill {
-        p:nth-child(2) {
-          font-size: 15px;
+        p:not(:first-child) {
+          color: ${({ theme }) => theme.sectext};
+          font-size: 12px;
         }
 
-        p {
-          font-size: 12px;
+        p:nth-child(2) {
+          font-size: 15px;
+          color: ${({ theme }) => theme.generaltext};
         }
       }
 
       .send-to {
         flex: 2;
+
+        p {
+          color: ${({ theme }) => theme.generaltext};
+        }
       }
     }
 
@@ -205,7 +210,7 @@ export const ViewInvoiceWrapper = styled.div`
         background-color: ${({ theme }) => theme.viewitembg};
 
         .header {
-          /* color: ; */
+          color: ${({ theme }) => theme.sectext};
           font-size: 12px;
           margin-bottom: 22px;
 
@@ -236,18 +241,23 @@ export const ViewInvoiceWrapper = styled.div`
           p {
             flex: 1;
             text-align: right;
+            color: ${({ theme }) => theme.generaltext};
           }
         }
 
         .empty {
           margin: 30px 10px;
           text-align: center;
+
+          p {
+            font-size: 14px;
+          }
         }
       }
 
       .inv-total {
         padding: 12px;
-        color: ${({ theme }) => theme.generaltext};
+        color: #fff;
         background-color: ${({ theme }) => theme.totalbg};
         align-items: center;
         border-radius: 0 0 20px 20px;
@@ -276,5 +286,66 @@ export const ViewInvoiceWrapper = styled.div`
 
   @media (max-width: 576px) {
     width: auto;
+
+    .m-menu {
+      display: block;
+      background-color: ${({ theme }) => theme.viewmenu};
+      margin: 20px 0 0;
+      padding: 20px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      align-items: center;
+
+      .flex {
+        justify-content: space-around;
+        margin-bottom: 15px;
+      }
+
+      .print {
+        width: 100%;
+      }
+    }
+
+    .menu {
+      border-radius: 8px;
+
+      .right {
+        display: none;
+      }
+    }
+
+    .invoice-info {
+      padding: 20px;
+      border-radius: 8px;
+
+      /* First */
+      .m1-flex {
+        flex-direction: column;
+
+        .col-left {
+          p:first-child {
+            font-size: 16px;
+          }
+        }
+
+        .col-right {
+          text-align: left;
+        }
+      }
+
+      /* Second */
+      .m2-flex {
+        flex-direction: column;
+        margin-top: 10px;
+        gap: 10px;
+      }
+
+      /* Third */
+      .inv-items {
+        .header {
+          display: none;
+        }
+      }
+    }
   }
 `;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import InvoicesContext from '../context/InvoicesContext';
 
 // styles
 import { ViewInvoiceWrapper } from '../styles/ViewInvoice.styles';
@@ -8,10 +9,20 @@ import { ViewInvoiceWrapper } from '../styles/ViewInvoice.styles';
 // icons
 import arrowLeft from '../assets/icon-arrow-left.svg';
 
-const ViewInvoice = ({ }) => {
-  
+const ViewInvoice = () => {
+  const { invoices, setInvoices } = useContext(InvoicesContext);
+  const { id } = useParams();
+  let navigate = useNavigate();
 
-  const invItemList = [];
+  const getInvoice = invoices.find((invoice) => invoice.id === id);
+
+  const itemArray = getInvoice.invItemList;
+
+  const handleRemoveInvoice = (id) => {
+    setInvoices(invoices.filter((invoice) => invoice.id !== id));
+    navigate('/');
+  };
+
   return (
     <ViewInvoiceWrapper>
       <Link to="/">
@@ -30,50 +41,60 @@ const ViewInvoice = ({ }) => {
         </div>
 
         <span className="right flex">
-          <button className="btn edit">Edit</button>
-          <button className="btn delete">Delete</button>
+          <button
+            onClick={() => navigate(`/edit-invoice/${id}`)}
+            className="btn edit"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => handleRemoveInvoice(id)}
+            className="btn delete"
+          >
+            Delete
+          </button>
           <button className="btn mark-paid">Mark as Paid</button>
           <button className="btn print">Print</button>
         </span>
       </div>
 
       <div className="invoice-info flex flex-column">
-        <div className="first flex">
+        <div className="first flex m1-flex">
           <div className="col-left">
             <p>
-              <span>#</span>id
+              <span>#</span> {id}
             </p>
-            <p>desc</p>
+            <p>{getInvoice.proDesc}</p>
           </div>
           <div className="col-right">
-            <p>billerAddress</p>
-            <p>billerCity</p>
-            <p>billerZip</p>
-            <p>billerCountry</p>
+            <p>{getInvoice.billerStreet}</p>
+            <p>{getInvoice.billerCity}</p>
+            <p>{getInvoice.billerZip}</p>
+            <p>{getInvoice.billerCountry}</p>
           </div>
         </div>
 
-        <div className="second flex">
+        <div className="second flex m2-flex">
           <div className="payment flex flex-column">
             <h6>Invoice Date</h6>
-            <p>invoiceDate</p>
+            <p>{getInvoice.invoiceDate}</p>
 
             <h6>Payment Due</h6>
-            <p>invoiceDueDate</p>
+            <p>{getInvoice.invoiceDueDate}</p>
           </div>
 
           <div className="bill flex flex-column">
             <h6>Bill To</h6>
-            <p>clientName</p>
-            <p>clientAddress</p>
-            <p>clientCity</p>
-            <p>clientZip</p>
-            <p>clientCountry</p>
+            <p>{getInvoice.clientName}</p>
+            <p>{getInvoice.clientStreet}</p>
+            <p>{getInvoice.clientCity}</p>
+            <p>{getInvoice.clientZip}</p>
+            <p>{getInvoice.clientCountry}</p>
           </div>
 
           <div className="send-to flex flex-column">
             <h6>Sent to</h6>
-            <p>devcreed18@gmail.com </p>
+            <p>{getInvoice.clientEmail}</p>
           </div>
         </div>
 
@@ -86,8 +107,8 @@ const ViewInvoice = ({ }) => {
               <p>Total</p>
             </div>
 
-            {!_.isEmpty(invItemList) ? (
-              invItemList.map((item, index) => (
+            {!_.isEmpty(itemArray) ? (
+              itemArray.map((item, index) => (
                 <div className="item flex" key={index}>
                   <p>{item.itemName}</p>
                   <p>{item.qty}</p>
@@ -104,8 +125,31 @@ const ViewInvoice = ({ }) => {
           </div>
 
           <div className="inv-total flex">
-            <p>AmountDue</p> <p>$556.00</p>
+            <p>Grand Total</p> <p>$ {getInvoice.invTotal}</p>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className="m-menu">
+        <div className="flex">
+          <button
+            onClick={() => navigate(`/edit-invoice/${id}`)}
+            className="btn edit"
+          >
+            Edit
+          </button>
+          <button className="btn mark-paid">Mark as Paid</button>
+          <button
+            onClick={() => handleRemoveInvoice(id)}
+            className="btn delete"
+          >
+            Delete
+          </button>
+        </div>
+
+        <div>
+          <button className="btn print">Print</button>
         </div>
       </div>
     </ViewInvoiceWrapper>

@@ -80,6 +80,10 @@ export const HomeWrapper = styled.div`
 
   .inv-btn-div {
     margin-left: 50px;
+
+    @media (max-width: 576px) {
+      margin-left: 20px;
+    }
   }
 
   .new-inv {

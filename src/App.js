@@ -18,7 +18,7 @@ const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const [invoices, setInvoices] = useLocalStorage('invoices', []);
 
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const themeMode = theme === 'light' ? lightTheme : darkTheme; 
 
   return (
     <Router>

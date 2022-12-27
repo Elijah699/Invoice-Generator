@@ -110,7 +110,7 @@ export const HomeWrapper = styled.div`
   /* ======= End of HOME NAV ======= */
 
   .invoice-item {
-    margin-top: 30px;
+    margin: 30px 0;
   }
 
   .empty {

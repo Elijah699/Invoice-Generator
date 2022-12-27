@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Toggle from './Toggler';
 
 // icons
@@ -15,6 +15,12 @@ import {
 
 const Header = ({ theme, themeToggler }) => {
   // const [theme, themeToggler] = useDarkMode();
+
+  // const location = useLocation();
+
+  // if (location.pathname === '/print-invoice/:id') {
+  //   return <div></div>
+  // }
 
   return (
     <HeaderWrapper>

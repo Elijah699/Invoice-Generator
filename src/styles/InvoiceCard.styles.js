@@ -17,14 +17,16 @@ export const InvoiceCardWrapper = styled.div`
   }
 
   .flex-left {
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
     flex-basis: 60%;
     gap: 16px;
 
-    span {
+    /* span {
       flex: 1;
       margin: 0 7px;
-    }
+    } */
 
     .track-id {
       text-transform: uppercase;
@@ -37,6 +39,8 @@ export const InvoiceCardWrapper = styled.div`
   }
 
   .flex-right {
+    display: flex;
+    justify-content: space-evenly;
     gap: 16px;
     flex-basis: 40%;
     align-items: center;
@@ -49,43 +53,18 @@ export const InvoiceCardWrapper = styled.div`
   }
 
 
-  .status-button {
-    &::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-    font-size: 12px;
-    margin-right: 30px;
-    align-items: center;
-    padding: 8px 30px;
-    border-radius: 10px;
-  }
+  @media (max-width: 576px) {
 
-  .paid {
-    &::before {
-      background-color: #33d69f;
+    .flex-left {
+      flex-direction: column;
     }
 
-    color: #33d69f;
-    background-color: rgba(51, 214, 160, 0.1);
-  }
+    .flex-right {
+      flex-direction: column;
 
-  .pending {
-    &::before {
-      background-color: #ff8f00;
+      .right-icon {
+        display: none;
+      }
     }
-    color: #ff8f00;
-    background-color: rgba(255, 145, 0, 0.1);
-  }
-
-  .draft {
-    &::before {
-      background-color: #dfe3fa;
-    }
-    color: #dfe3fa;
-    background-color: rgba(223, 227, 250, 0.1);
   }
 `;

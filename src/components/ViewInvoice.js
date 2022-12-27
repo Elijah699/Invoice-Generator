@@ -17,10 +17,26 @@ const ViewInvoice = () => {
   const getInvoice = invoices.find((invoice) => invoice.id === id);
 
   const itemArray = getInvoice.invItemList;
+  const invoiceStatus = getInvoice.invPending;
 
+
+  // Set invoice as paid or pending
+  const markAsPaid = () => {
+    getInvoice.invPending = !invoiceStatus;
+    const filteredInvoices = invoices.filter((invoice) => invoice.id !== id);
+    setInvoices([getInvoice, ...filteredInvoices]);
+  };
+
+  // Delete Invoice
   const handleRemoveInvoice = (id) => {
     setInvoices(invoices.filter((invoice) => invoice.id !== id));
     navigate('/');
+  };
+
+  // Print Invoice
+
+  const handlePrint = () => {
+    navigate(`/print-invoice/${id}`);
   };
 
   return (
@@ -36,7 +52,13 @@ const ViewInvoice = () => {
         <div className="left flex">
           <span>Status</span>
           <div className="status-btn flex">
-            <span>Pending</span>
+            <span
+              className={`status ${
+                invoiceStatus === true ? 'pending' : 'paid'
+              }`}
+            >
+              {invoiceStatus === true ? 'pending' : 'paid'}
+            </span>
           </div>
         </div>
 
@@ -53,8 +75,15 @@ const ViewInvoice = () => {
           >
             Delete
           </button>
-          <button className="btn mark-paid">Mark as Paid</button>
-          <button className="btn print">Print</button>
+          <button onClick={markAsPaid} className="btn mark-paid">
+            {invoiceStatus === true ? 'Mark as Paid' : 'Mark as Pending'}
+          </button>
+          <button
+            onClick={handlePrint}
+            className="btn print"
+          >
+            Print
+          </button>
         </span>
       </div>
 
@@ -67,6 +96,7 @@ const ViewInvoice = () => {
             <p>{getInvoice.proDesc}</p>
           </div>
           <div className="col-right">
+            <p>{getInvoice.billerName}</p>
             <p>{getInvoice.billerStreet}</p>
             <p>{getInvoice.billerCity}</p>
             <p>{getInvoice.billerZip}</p>
@@ -114,6 +144,7 @@ const ViewInvoice = () => {
                   <p>{item.qty}</p>
                   <p>{item.price}</p>
                   <p>{item.total}</p>
+                  {/* <p>{item.qty * item.price}</p> */}
                 </div>
               ))
             ) : (

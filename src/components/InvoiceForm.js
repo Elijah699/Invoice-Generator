@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_TO_ITEMLIST, REMOVE_FROM_ITEMLIST } from '../redux/Reducer';
+import { addItems, removeItem } from '../state/ItemSlice';
+import { nanoid } from 'nanoid';
 
 import TableRows from './TableRows';
 import NewInvoiceBtn from './NewInvoiceBtn';
 import EditInvoiceBtn from './EditInvoiceBtn';
 
 // styles
-import {
-  StyledModal,
-  FormWrapper
-} from '../styles/InvoiceForm.styles';
+import { StyledModal, FormWrapper } from '../styles/InvoiceForm.styles';
 
 // icons
 import plus from '../assets/icon-plus.svg';
@@ -18,13 +16,14 @@ import plus from '../assets/icon-plus.svg';
 const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
   const invoiceTitle = title === 'New Invoice';
 
-  const items = useSelector((state) => state.invItem.invItemList);
+  const items = useSelector((state) => state.invItem.items);
   console.log(items);
-  
+
   const dispatch = useDispatch();
 
   const [invoice, setInvoice] = useState(() => {
     return {
+      billerName: invProp ? invProp.billerName : '',
       billerStreet: invProp ? invProp.billerStreet : '',
       billerCity: invProp ? invProp.billerCity : '',
       billerZip: invProp ? invProp.billerZip : '',
@@ -43,6 +42,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
   });
 
   const {
+    billerName,
     billerStreet,
     billerCity,
     billerZip,
@@ -80,13 +80,56 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
     }));
   };
 
+  // ======= Add Item handlers =======
+  // Table
+  const itemArray = [];
+  const [rowsData, setRowsData] = useState([]);
+
+  const addTableRows = () => {
+    const rowsInput = {
+      itemName: '',
+      qty: '',
+      price: '',
+      total: 0,
+    };
+    setRowsData([...rowsData, rowsInput]);
+  };
+
+  const addItemToStore = (newItem) => {
+    dispatch(addItems(newItem));
+  };
+
+  const removeItemFromStore = (index) => {
+    dispatch(removeItem(index));
+  };
+
+  const deleteTableRows = (index) => {
+    // removeItemFromStore(index);
+    const rows = [...rowsData];
+    rows.splice(index, 1);
+    setRowsData(rows);
+  };
+
+  const handleChange = (index, evnt) => {
+    const { name, value } = evnt.target;
+    const rowsInput = [...rowsData];
+    rowsInput[index][name] = value;
+
+    setRowsData(rowsInput);
+  };
+
+  // ====== End of Add Item handler =======
+
   const submitForm = (event) => {
     event.preventDefault();
 
-    const id = () => Math.random().toString(36).substring(2);
+    itemArray.push(...rowsData);
+
+    const id = () => Math.random().toString(36).substring(2, 8);
 
     const invoice = {
       id: id(),
+      billerName,
       billerStreet,
       billerCity,
       billerZip,
@@ -101,52 +144,16 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
       invoiceDueDate,
       payTerm,
       proDesc,
-      invItemList: items,
+      invItemList: itemArray,
       invTotal: 0,
       invPending: true,
-      invDraft: false,
-      invPaid: false,
     };
+
+    console.log(rowsData);
+    //  addItemToStore(rowsData);
 
     handleOnSubmit(invoice);
-    // console.log(invoice);
   };
-
-  // ======= Add Item handlers =======
-  // Table
-  const [rowsData, setRowsData] = useState([]);
-
-  const handleItemData = (data) => {
-    console.log(data);
-    // dispatch(ADD_TO_ITEMLIST(data));
-  };
-
-  const addTableRows = () => {
-    const rowsInput = {
-      itemName: '',
-      qty: '',
-      price: '',
-    };
-    setRowsData([...rowsData, rowsInput]);
-  };
-
-  const deleteTableRows = (index) => {
-    const rows = [...rowsData];
-    rows.splice(index, 1);
-    setRowsData(rows);
-
-    // const dispatchfunction = () => dispatch(REMOVE_FROM_ITEMLIST());
-    // dispatchfunction();
-  };
-
-  const handleChange = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const rowsInput = [...rowsData];
-    rowsInput[index][name] = value;
-    setRowsData(rowsInput);
-  };
-
-  // ====== End of Add Item handler =======
 
   return (
     <StyledModal>
@@ -156,6 +163,17 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
         {/* Bill From */}
         <div className="billFrom">
           <h4>Bill From</h4>
+
+          <div className="flex-col-con">
+            <label htmlFor="billerName">Biller's Name</label>
+            <input
+              name="billerName"
+              type="text"
+              value={billerName}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
 
           <div className="flex-col-con">
             <label htmlFor="billerStreetAddress">Street Address</label>
@@ -340,7 +358,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
                   rowsData={rowsData}
                   deleteTableRows={deleteTableRows}
                   handleChange={handleChange}
-                  // handleItemData={handleItemData}
+                  // sendData={handleItemData}
                 />
               </tbody>
             </table>
@@ -356,7 +374,11 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
           </div>
         </div>
 
-       {invoiceTitle ? <NewInvoiceBtn submitText={submitText} /> : <EditInvoiceBtn submitText={submitText} />}
+        {invoiceTitle ? (
+          <NewInvoiceBtn submitText={submitText} />
+        ) : (
+          <EditInvoiceBtn submitText={submitText} />
+        )}
       </FormWrapper>
     </StyledModal>
   );

@@ -228,7 +228,7 @@ export const FormWrapper = styled.form`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 829px) {
     left: 0;
     padding: 70px 25px 10px;
     width: auto;

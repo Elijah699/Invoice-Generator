@@ -38,7 +38,7 @@ margin-top: auto;
 border-top: 1px solid #777f98;
 margin-bottom: 30px;
 
-@media(max-width: 768px) {
+@media(max-width: 829px) {
     margin-left: auto;
 }
 `;

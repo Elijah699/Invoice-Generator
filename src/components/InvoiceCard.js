@@ -26,7 +26,9 @@ const InvoiceCard = ({
 
       <div className="flex-right">
         <span className="total">{invTotal}</span>
-        <span className="status">{invPending}</span>
+        <span className={`status ${invPending === true ? 'pending' : 'paid'}`}>
+          {invPending === true ? 'Pending' : 'Paid'}
+        </span>
         <span className="right-icon">
           <img src={arrowRight} alt="arrow-right" />
         </span>

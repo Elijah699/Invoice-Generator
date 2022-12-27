@@ -78,42 +78,6 @@ export const ViewInvoiceWrapper = styled.div`
       span {
         margin-right: 10px;
       }
-
-      .status-button {
-        &::before {
-          content: '';
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          margin-right: 8px;
-        }
-        font-size: 12px;
-        margin-right: 30px;
-        align-items: center;
-        padding: 8px 30px;
-        border-radius: 10px;
-      }
-      .paid {
-        &::before {
-          background-color: #33d69f;
-        }
-        color: #33d69f;
-        background-color: rgba(51, 214, 160, 0.1);
-      }
-      .pending {
-        &::before {
-          background-color: #ff8f00;
-        }
-        color: #ff8f00;
-        background-color: rgba(255, 145, 0, 0.1);
-      }
-      .draft {
-        &::before {
-          background-color: #dfe3fa;
-        }
-        color: #dfe3fa;
-        background-color: rgba(223, 227, 250, 0.1);
-      }
     }
 
     .right {

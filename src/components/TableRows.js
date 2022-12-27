@@ -1,4 +1,7 @@
 // import { useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { addItems } from '../state/ItemSlice';
+
 // styles
 import styled from 'styled-components';
 
@@ -20,50 +23,17 @@ const InputCon = styled.input`
 `;
 
 const TableRows = ({
+  invProp,
   rowsData,
   deleteTableRows,
-  handleItemData,
   handleChange,
 }) => {
-  // const [errorMsg, setErrorMsg] = useState('');
-  // const itemData = () => {
-  //   const values = [itemName, qty, price];
-  //   let errorMsg = '';
 
-  //   const allInputFilled = values.every((input) => {
-  //     const value = `${input}`.trim();
-  //     return value !== '' && value !== '0';
-  //   });
-
-  //   if (allInputFilled) {
-  //     const newItem = {
-  //       id: index + 1,
-  //       itemName,
-  //       qty,
-  //       price,
-  //       total: qty * price,
-  //     };
-
-  //     handleItemData(newItem);
-  //   } else {
-  //     errorMsg = 'Please fill the input';
-  //   }
-
-  //   setErrorMsg(errorMsg);
-  // };
 
   return rowsData.map((data, index) => {
-    const { itemName, qty, price } = data;
-
-    const newItem = {
-      id: index + 1,
-      itemName,
-      qty,
-      price,
-      total: qty * price,
-    };
-
-    // handleItemData(newItem);
+    let { itemName, qty, price, total } = data;
+    total = qty * price;
+    console.log(total);
 
     return (
       <tr className="table-items" key={index}>
@@ -91,7 +61,16 @@ const TableRows = ({
             onChange={(evnt) => handleChange(index, evnt)}
           />
         </td>
-        <td className="total">{qty * price}</td>
+        {/* <td className="total">{total}</td> */}
+        <td className="total">
+          <InputCon
+            name="total"
+            value={total}
+            disabled
+            type="text"
+            onChange={(evnt) => handleChange(index, evnt)}
+          />
+        </td>
         <img
           src={bin}
           onClick={() => deleteTableRows(index)}

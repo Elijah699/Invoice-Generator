@@ -13,7 +13,7 @@ import plus from '../assets/icon-plus.svg';
 import emptyIllustration from '../assets/illustration-empty.svg';
 
 const Home = () => {
-  const { invoices, setInvoices } = useContext(InvoicesContext);
+  const { invoices } = useContext(InvoicesContext);
 
   const InvoicesNum = invoices.length;
 

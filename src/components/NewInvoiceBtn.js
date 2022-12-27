@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // styles
-import { RedBtn, PurpleBtn, GreenBtn } from '../styles/InvoiceForm.styles';
+import { RedBtn,
+        //  PurpleBtn,
+         GreenBtn
+} from '../styles/InvoiceForm.styles';
 
-const NewInvoiceBtn = ({submitText}) => {
+const NewInvoiceBtn = ({ submitText }) => {
   return (
     <div>
       {/* Save/Print/Exit */}
@@ -16,7 +19,9 @@ const NewInvoiceBtn = ({submitText}) => {
         </div>
         <div>
           <div className="right">
-            <PurpleBtn>Save Draft</PurpleBtn>
+            {/* <PurpleBtn type="submit" onClick={saveDraft}>
+              Save Draft
+            </PurpleBtn> */}
             <GreenBtn type="submit">{submitText}</GreenBtn>
           </div>
         </div>
@@ -28,7 +33,9 @@ const NewInvoiceBtn = ({submitText}) => {
           <Link to="/">
             <RedBtn type="button">Cancel</RedBtn>
           </Link>
-          <PurpleBtn>Save Draft</PurpleBtn>
+          {/* <PurpleBtn type="submit" onClick={saveDraft}>
+            Save Draft
+          </PurpleBtn> */}
         </div>
         <div>
           <div className="create">
@@ -38,6 +45,6 @@ const NewInvoiceBtn = ({submitText}) => {
       </div>
     </div>
   );
-}
+};
 
-export default NewInvoiceBtn
+export default NewInvoiceBtn;

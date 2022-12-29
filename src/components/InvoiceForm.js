@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItems, removeItem } from '../state/ItemSlice';
-import { nanoid } from 'nanoid';
-
 import TableRows from './TableRows';
 import NewInvoiceBtn from './NewInvoiceBtn';
 import EditInvoiceBtn from './EditInvoiceBtn';
@@ -13,13 +9,9 @@ import { StyledModal, FormWrapper } from '../styles/InvoiceForm.styles';
 // icons
 import plus from '../assets/icon-plus.svg';
 
+
 const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
   const invoiceTitle = title === 'New Invoice';
-
-  const items = useSelector((state) => state.invItem.items);
-  console.log(items);
-
-  const dispatch = useDispatch();
 
   const [invoice, setInvoice] = useState(() => {
     return {
@@ -95,16 +87,8 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
     setRowsData([...rowsData, rowsInput]);
   };
 
-  const addItemToStore = (newItem) => {
-    dispatch(addItems(newItem));
-  };
-
-  const removeItemFromStore = (index) => {
-    dispatch(removeItem(index));
-  };
 
   const deleteTableRows = (index) => {
-    // removeItemFromStore(index);
     const rows = [...rowsData];
     rows.splice(index, 1);
     setRowsData(rows);
@@ -124,6 +108,24 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
     event.preventDefault();
 
     itemArray.push(...rowsData);
+
+    // calculate total for each item
+    const getEachItemTotal = () => {
+      itemArray.forEach((item) => {
+        item.total = item.qty * item.price;
+      });
+    };
+
+    getEachItemTotal();
+
+    // calculate total for all items
+    const getInvoiceTotal = () => {
+      let total = 0;
+      itemArray.forEach((item) => {
+        total += item.total;
+      });
+      return total;
+    };
 
     const id = () => Math.random().toString(36).substring(2, 8);
 
@@ -145,12 +147,9 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
       payTerm,
       proDesc,
       invItemList: itemArray,
-      invTotal: 0,
+      invTotal: getInvoiceTotal(),
       invPending: true,
     };
-
-    console.log(rowsData);
-    //  addItemToStore(rowsData);
 
     handleOnSubmit(invoice);
   };
@@ -358,7 +357,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
                   rowsData={rowsData}
                   deleteTableRows={deleteTableRows}
                   handleChange={handleChange}
-                  // sendData={handleItemData}
+                  invProp={invProp}
                 />
               </tbody>
             </table>

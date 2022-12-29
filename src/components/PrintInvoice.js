@@ -15,7 +15,9 @@ const PrintInvoice = () => {
 
   const getInvoice = invoices.find((invoice) => invoice.id === id);
 
-  console.log(getInvoice);
+  console.log(getInvoice.invItemList[0].itemName);
+
+  // const itemsArray = JSON.parse(getInvoice.invItemList);
   // useEffect(() => {
   //   printDocument();
   // }, []);
@@ -41,60 +43,75 @@ const PrintInvoice = () => {
         <div className="blue-one"></div>
         <h2>INVOICE</h2>
 
-        <div className="flex first">
-          <div>
-            <h6>{getInvoice.billerName}</h6>
-            <p>{getInvoice.billerStreet}</p>
-            <p>{getInvoice.billerCity}</p>
-            <p>{getInvoice.billerCountry}</p>
-            <p>{getInvoice.billerZip}</p>
+        <div className="info">
+          <div className="first">
+            <div>
+              <h5>{getInvoice.billerName}</h5>
+              <p>{getInvoice.billerStreet}</p>
+              <p>{getInvoice.billerCity}</p>
+              <p>{getInvoice.billerCountry}</p>
+              <p>{getInvoice.billerZip}</p>
+            </div>
+            <div>
+              <h5 className="blue">INVOICE TO:</h5>
+              <p>{getInvoice.clientName}</p>
+              <p>{getInvoice.clientStreet}</p>
+              <p>{getInvoice.clientEmail}</p>
+              <p>{getInvoice.clientCity}</p>
+              <p>{getInvoice.clientCountry}</p>
+              <p>{getInvoice.clientZip}</p>
+            </div>
+            <div>
+              <h5 className="blue">Invoice Number</h5>
+              <p className='caps'>{getInvoice.id}</p>
+              <h5 className="blue">Date of Invoice</h5>
+              <p>{getInvoice.invoiceDate}</p>
+              <h5 className="blue">Due Date</h5>
+              <p>{getInvoice.invoiceDueDate}</p>
+            </div>
           </div>
-          <div>
-            <h6 className="blue">INVOICE TO:</h6>
-            <p>{getInvoice.clientName}</p>
-            <p>{getInvoice.clientStreet}</p>
-            <p>{getInvoice.clientEmail}</p>
-            <p>{getInvoice.clientCity}</p>
-            <p>{getInvoice.clientCountry}</p>
-            <p>{getInvoice.clientZip}</p>
+
+          <div className="second">
+            <table>
+              <tr>
+                <th width='50%'>DESCRIPTION</th>
+                <th width='10%'>QTY</th>
+                <th width='20%'>PRICE</th>
+                <th width='20%'>TOTAL</th>
+              </tr>
+              {
+                getInvoice.invItemList.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td width='50%'>{item.itemName}</td>
+                      <td width='10%'>{item.qty}</td>
+                      <td width='20%'>{item.price}</td>
+                      <td width='20%'>{item.total}</td>
+                    </tr>
+                  )
+                }
+                )
+              }
+            </table>
           </div>
-          <div>
-            <h6 className="blue">Invoice Number</h6>
-            <p>{getInvoice.id}</p>
-            <h6 className="blue">Date of Invoice</h6>
-            <p>{getInvoice.invoiceDate}</p>
-            <h6 className="blue">Due Date</h6>
-            <p>{getInvoice.invoiceDueDate}</p>
+
+          <div className="third">
+            <p>
+              SUBTOTAL: <span></span>
+            </p>
+            <p>
+              DISCOUNT: <span></span>
+            </p>
+            <p>
+              BALANCE DUE: <span></span>
+            </p>
           </div>
-        </div>
 
-        <div className="second">
-          <table>
-            <tr>
-              <th>DESCRIPTION</th>
-              <th>QTY</th>
-              <th>PRICE</th>
-              <th>TOTAL</th>
-            </tr>
-          </table>
-        </div>
+          <div className="fourth">
+            <p>NOTES: </p>
 
-        <div className="third">
-          <p>
-            SUBTOTAL: <span></span>
-          </p>
-          <p>
-            DISCOUNT: <span></span>
-          </p>
-          <p>
-            BALANCE DUE: <span></span>
-          </p>
-        </div>
-
-        <div className="fourth">
-          <p>NOTES: </p>
-
-          <p>TERMS AND CONDITION: </p>
+            <p>TERMS AND CONDITION: </p>
+          </div>
         </div>
 
         <div className="blue-two"></div>

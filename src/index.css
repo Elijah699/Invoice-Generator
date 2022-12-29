@@ -17,6 +17,12 @@ body {
   border-radius: 10px;
 }
 
+@media screen and (max-width: 576px) {
+   .status {
+    margin-right: 0;
+   }
+}
+
 .status::before {
   content: '';
   width: 10px;

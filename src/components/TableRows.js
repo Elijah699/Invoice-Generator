@@ -1,7 +1,3 @@
-// import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { addItems } from '../state/ItemSlice';
-
 // styles
 import styled from 'styled-components';
 
@@ -31,9 +27,7 @@ const TableRows = ({
 
 
   return rowsData.map((data, index) => {
-    let { itemName, qty, price, total } = data;
-    total = qty * price;
-    console.log(total);
+    let { itemName, qty, price } = data;
 
     return (
       <tr className="table-items" key={index}>
@@ -61,16 +55,7 @@ const TableRows = ({
             onChange={(evnt) => handleChange(index, evnt)}
           />
         </td>
-        {/* <td className="total">{total}</td> */}
-        <td className="total">
-          <InputCon
-            name="total"
-            value={total}
-            disabled
-            type="text"
-            onChange={(evnt) => handleChange(index, evnt)}
-          />
-        </td>
+        <td className="total">{qty * price}</td>
         <img
           src={bin}
           onClick={() => deleteTableRows(index)}

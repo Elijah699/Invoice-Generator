@@ -23,10 +23,6 @@ export const InvoiceCardWrapper = styled.div`
     flex-basis: 60%;
     gap: 16px;
 
-    /* span {
-      flex: 1;
-      margin: 0 7px;
-    } */
 
     .track-id {
       text-transform: uppercase;
@@ -57,10 +53,12 @@ export const InvoiceCardWrapper = styled.div`
 
     .flex-left {
       flex-direction: column;
+      flex-basis: 50%;
     }
 
     .flex-right {
       flex-direction: column;
+      flex-basis: 50%;
 
       .right-icon {
         display: none;

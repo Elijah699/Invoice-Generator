@@ -220,7 +220,7 @@ export const ViewInvoiceWrapper = styled.div`
       }
 
       .inv-total {
-        padding: 12px;
+        padding: 12px 35px;
         color: #fff;
         background-color: ${({ theme }) => theme.totalbg};
         align-items: center;

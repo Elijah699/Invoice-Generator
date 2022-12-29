@@ -78,10 +78,7 @@ const ViewInvoice = () => {
           <button onClick={markAsPaid} className="btn mark-paid">
             {invoiceStatus === true ? 'Mark as Paid' : 'Mark as Pending'}
           </button>
-          <button
-            onClick={handlePrint}
-            className="btn print"
-          >
+          <button onClick={handlePrint} className="btn print">
             Print
           </button>
         </span>
@@ -144,7 +141,6 @@ const ViewInvoice = () => {
                   <p>{item.qty}</p>
                   <p>{item.price}</p>
                   <p>{item.total}</p>
-                  {/* <p>{item.qty * item.price}</p> */}
                 </div>
               ))
             ) : (
@@ -156,7 +152,7 @@ const ViewInvoice = () => {
           </div>
 
           <div className="inv-total flex">
-            <p>Grand Total</p> <p>$ {getInvoice.invTotal}</p>
+            <p>Grand Total</p> <p>£{getInvoice.invTotal}</p>
           </div>
         </div>
       </div>

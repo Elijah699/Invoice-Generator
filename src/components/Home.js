@@ -17,12 +17,39 @@ const Home = () => {
 
   const InvoicesNum = invoices.length;
 
+  let filterableArray = invoices
+
   const [filter, setFilter] = useState(false);
 
   const toggleFilter = () => {
     setFilter(!filter);
   };
 
+  const handlePendingFilter = () => {
+    const pendingInvoices = invoices.filter(
+      (invoice) => invoice.invPending === true
+    );
+
+    // filterableArray = pendingInvoices
+    console.log(pendingInvoices);
+    toggleFilter()
+  };
+
+  const handlePaidFilter = () => {
+    const paidInvoices = invoices.filter((invoice) => invoice.invPending === false);
+
+    // filterableArray = paidInvoices
+    console.log(paidInvoices);
+    toggleFilter()
+  };
+
+  const handleAll = () => {
+    filterableArray = invoices
+    // console.log(invoices);
+    toggleFilter()
+  };
+
+  console.log(filterableArray);
   return (
     <HomeWrapper>
       <div className="home-nav">
@@ -41,10 +68,10 @@ const Home = () => {
               <img src={arrowdown} alt="arrow_down" />{' '}
             </div>
             <ul className={filter ? 'active' : ''}>
-              <li>Draft</li>
-              <li>Pending</li>
-              <li>Paid</li>
-              <li>All</li>
+              {/* <li>Draft</li> */}
+              <li onClick={handlePendingFilter}>Pending</li>
+              <li onClick={handlePaidFilter}>Paid</li>
+              <li onClick={handleAll}>All</li>
             </ul>
           </div>
 

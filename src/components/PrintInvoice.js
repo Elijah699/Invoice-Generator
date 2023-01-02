@@ -1,10 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import InvoicesContext from '../context/InvoicesContext';
-import jsPDF from 'jspdf';
-import pdfMake from 'pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import htmlToPdfmake from 'html-to-pdfmake';
+
+// PDFMAKE imports
+// import jsPDF from 'jspdf';
+// import pdfMake from 'pdfmake';
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+// import htmlToPdfmake from 'html-to-pdfmake';
 import { useParams } from 'react-router-dom';
+
+// REACT PDF RENDER imports
+// import { Document, Page } from '@react-pdf/renderer';
+// import download from '../assets/download.jpg'
 
 // styles
 import { PrintWrapper } from '../styles/PrintInvoice.styles';
@@ -15,29 +21,32 @@ const PrintInvoice = () => {
 
   const getInvoice = invoices.find((invoice) => invoice.id === id);
 
-  console.log(getInvoice.invItemList[0].itemName);
-
-  // const itemsArray = JSON.parse(getInvoice.invItemList);
-  // useEffect(() => {
-  //   printDocument();
-  // }, []);
+  useEffect(() => {
+    printDocument();
+  }, []);
 
   const printDocument = () => {
-    const doc = new jsPDF();
+    // const doc = new jsPDF();
 
-    // get html
-    const getHtmlDiv = document.getElementById('divToPrint');
+    // //   // get html
+    // const getHtmlDiv = document.getElementById('divToPrint');
 
-    let htmlPDF = htmlToPdfmake(getHtmlDiv.innerHTML);
+    // let htmlPDF = htmlToPdfmake(getHtmlDiv.innerHTML);
 
-    const documentDefinition = { content: htmlPDF };
+    // const documentDefinition = {
+    //   content: htmlPDF,
+    // };
 
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-    pdfMake.createPdf(documentDefinition).open();
+    // pdfMake.createPdf(documentDefinition).print();
+    window.print()
   };
 
   return (
+    // <Document title="invoice">
+    // <Page size="A4">
+    // <DownloadPDF />
     <PrintWrapper id="divToPrint">
       <div>
         <div className="blue-one"></div>
@@ -63,7 +72,7 @@ const PrintInvoice = () => {
             </div>
             <div>
               <h5 className="blue">Invoice Number</h5>
-              <p className='caps'>{getInvoice.id}</p>
+              <p className="caps">{getInvoice.id}</p>
               <h5 className="blue">Date of Invoice</h5>
               <p>{getInvoice.invoiceDate}</p>
               <h5 className="blue">Due Date</h5>
@@ -74,49 +83,53 @@ const PrintInvoice = () => {
           <div className="second">
             <table>
               <tr>
-                <th width='50%'>DESCRIPTION</th>
-                <th width='10%'>QTY</th>
-                <th width='20%'>PRICE</th>
-                <th width='20%'>TOTAL</th>
+                <th width="50%">DESCRIPTION</th>
+                <th width="10%">QTY</th>
+                <th width="20%">PRICE</th>
+                <th width="20%">TOTAL</th>
               </tr>
-              {
-                getInvoice.invItemList.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td width='50%'>{item.itemName}</td>
-                      <td width='10%'>{item.qty}</td>
-                      <td width='20%'>{item.price}</td>
-                      <td width='20%'>{item.total}</td>
-                    </tr>
-                  )
-                }
-                )
-              }
+              {getInvoice.invItemList.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td width="50%">{item.itemName}</td>
+                    <td width="10%">{item.qty}</td>
+                    <td width="20%">{item.price}</td>
+                    <td width="20%">{item.total}</td>
+                  </tr>
+                );
+              })}
             </table>
           </div>
 
           <div className="third">
             <p>
-              SUBTOTAL: <span></span>
+              SUBTOTAL:{' '}
+              <span className="sub-total">£{getInvoice.invTotal}</span>
             </p>
             <p>
-              DISCOUNT: <span></span>
+              DISCOUNT: <span>0</span>
             </p>
             <p>
-              BALANCE DUE: <span></span>
+              BALANCE DUE:{' '}
+              <span className="bal-due">£{getInvoice.invTotal}</span>
             </p>
           </div>
 
           <div className="fourth">
-            <p>NOTES: </p>
+            <p>NOTE: Thanks for patronizing us!!!</p>
 
-            <p>TERMS AND CONDITION: </p>
+            <p>
+              TERMS AND CONDITION:{' '}
+              <span>Please make the payment before or by the due date.</span>
+            </p>
           </div>
         </div>
 
         <div className="blue-two"></div>
       </div>
     </PrintWrapper>
+    // </Page>
+    // </Document>
   );
 };
 

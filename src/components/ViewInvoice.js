@@ -166,7 +166,9 @@ const ViewInvoice = () => {
           >
             Edit
           </button>
-          <button className="btn mark-paid">Mark as Paid</button>
+          <button onClick={markAsPaid} className="btn mark-paid">
+            {invoiceStatus === true ? 'Mark as Paid' : 'Mark as Pending'}
+          </button>
           <button
             onClick={() => handleRemoveInvoice(id)}
             className="btn delete"
@@ -176,7 +178,7 @@ const ViewInvoice = () => {
         </div>
 
         <div>
-          <button className="btn print">Print</button>
+          <button onClick={handlePrint} className="btn print">Print</button>
         </div>
       </div>
     </ViewInvoiceWrapper>

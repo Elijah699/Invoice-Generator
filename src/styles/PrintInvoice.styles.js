@@ -1,16 +1,20 @@
-import styled from "styled-components";
-// import bgBlob from '../assets/blob.svg'
-
+import styled from 'styled-components';
 
 export const PrintWrapper = styled.div`
+  -webkit-print-color-adjust: exact;
   background-color: #fefefe;
   color: #000;
 
   .blue-one,
   .blue-two {
     background-color: #2f80ed;
-    height: 10vh;
+    height: 40px;
     width: 100%;
+  }
+
+  .blue-two {
+    position: fixed;
+    bottom: 0;
   }
 
   h2 {
@@ -30,7 +34,8 @@ export const PrintWrapper = styled.div`
       flex-direction: row;
       justify-content: space-between;
 
-      p, h5 {
+      p,
+      h5 {
         margin-block-end: 0;
         margin-block-start: 0;
       }
@@ -45,34 +50,45 @@ export const PrintWrapper = styled.div`
     }
 
     .second {
-        margin: 3rem 0 1.5rem;
+      margin: 3rem 0 1.5rem;
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #fff;
-            th {
-                background: #315491;
-                border: 1px solid #e4e4e4;
-                color: #fff;
-                padding: 0.5rem;
-                text-align: center;
-            }
-            td {
-                padding: 0.5rem;
-                border: 1px solid #e4e4e4;
-                background-color: #d8d8d8;
-                text-align: center;
-
-                &:first-child {
-                    text-align: left;
-                }
-            }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #fff;
+        th {
+          /* -webkit-print-color-adjust: exact; */
+          background: #315491;
+          border: 1px solid #e4e4e4;
+          color: #fff;
+          padding: 0.5rem;
+          text-align: center;
         }
+        td {
+          padding: 0.5rem;
+          border: 1px solid #e4e4e4;
+          background-color: #d8d8d8;
+          text-align: center;
+
+          &:first-child {
+            text-align: left;
+          }
+        }
+      }
     }
 
     .third {
-        text-align: right;
+      text-align: right;
+
+      .bal-due,
+      .sub-total {
+        font-weight: 800;
+      }
+    }
+
+    .fourth {
+      position: fixed;
+      bottom: 30px;
     }
   }
 `;

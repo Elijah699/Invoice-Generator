@@ -12,6 +12,7 @@ const InvoiceCard = ({
   clientName,
   invPending,
   invTotal,
+  currency
 }) => {
   // console.log(id, invoiceDueDate, invPending);
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const InvoiceCard = ({
       </div>
 
       <div className="flex-right">
-        <span className="total"> £{invTotal}</span>
+        <span className="total"> {currency} {invTotal}</span>
         <span className={`status ${invPending === true ? 'pending' : 'paid'}`}>
           {invPending === true ? 'Pending' : 'Paid'}
         </span>

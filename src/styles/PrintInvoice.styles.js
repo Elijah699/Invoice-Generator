@@ -35,7 +35,8 @@ export const PrintWrapper = styled.div`
       justify-content: space-between;
 
       p,
-      h5 {
+      h5,
+      h4 {
         margin-block-end: 0;
         margin-block-start: 0;
       }

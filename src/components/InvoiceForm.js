@@ -3,6 +3,7 @@ import TableRows from './TableRows';
 import NewInvoiceBtn from './NewInvoiceBtn';
 import EditInvoiceBtn from './EditInvoiceBtn';
 
+
 // styles
 import { StyledModal, FormWrapper } from '../styles/InvoiceForm.styles';
 
@@ -30,6 +31,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
       payDue: invProp ? invProp.payDue : '',
       payTerm: invProp ? invProp.payTerm : 30,
       proDesc: invProp ? invProp.proDesc : '',
+      currency: invProp ? invProp.currency : '₦',
     };
   });
 
@@ -47,6 +49,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
     clientCountry,
     payTerm,
     proDesc,
+    currency
   } = invoice;
 
   // ======= date handler =======
@@ -77,7 +80,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
   const itemArray = [];
   const [rowsData, setRowsData] = useState([]);
 
-  const addTableRows = () => {
+  const addTableRows = (index) => {
     const rowsInput = {
       itemName: '',
       qty: '',
@@ -86,7 +89,6 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
     };
     setRowsData([...rowsData, rowsInput]);
   };
-
 
   const deleteTableRows = (index) => {
     const rows = [...rowsData];
@@ -146,6 +148,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
       invoiceDueDate,
       payTerm,
       proDesc,
+      currency,
       invItemList: itemArray,
       invTotal: getInvoiceTotal(),
       invPending: true,
@@ -164,7 +167,7 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
           <h4>Bill From</h4>
 
           <div className="flex-col-con">
-            <label htmlFor="billerName">Biller's Name</label>
+            <label htmlFor="billerName">Biller's Name/ Organisation's Name</label>
             <input
               name="billerName"
               type="text"
@@ -337,6 +340,22 @@ const InvoiceForm = ({ invProp, title, submitText, handleOnSubmit }) => {
                 onChange={handleInputChange}
                 required
               />
+            </div>
+          </div>
+
+          <div className="currency">
+            <div className="flex-col-con">
+              <label htmlFor="currency">Select Currency</label>
+              <select
+                name="currency"
+                value={currency}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="₦">Naira - ₦</option>
+                <option value="$">Dollar - $</option>
+                <option value="£">Pounds - £</option>
+              </select>
             </div>
           </div>
 

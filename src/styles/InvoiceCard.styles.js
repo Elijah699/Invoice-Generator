@@ -37,13 +37,13 @@ export const InvoiceCardWrapper = styled.div`
   .flex-right {
     display: flex;
     justify-content: space-evenly;
-    gap: 16px;
+    gap: 10px;
     flex-basis: 40%;
     align-items: center;
 
     .total {
       flex: 1;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
   }

@@ -152,7 +152,7 @@ const ViewInvoice = () => {
           </div>
 
           <div className="inv-total flex">
-            <p>Grand Total</p> <p>£{getInvoice.invTotal}</p>
+            <p>Grand Total</p> <p>{getInvoice.currency} {getInvoice.invTotal}</p>
           </div>
         </div>
       </div>

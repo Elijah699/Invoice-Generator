@@ -72,7 +72,8 @@ export const FormWrapper = styled.form`
     flex-direction: column;
     flex: 1;
 
-    .desc {
+    .desc,
+    .currency {
       margin: 10px 0;
 
       select {
@@ -119,11 +120,12 @@ export const FormWrapper = styled.form`
 
       .flex {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
       }
 
       .create {
-        margin-top: 20px;
         text-align: center;
 
         button {

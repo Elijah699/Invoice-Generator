@@ -15,9 +15,9 @@ import emptyIllustration from '../assets/illustration-empty.svg';
 const Home = () => {
   const { invoices } = useContext(InvoicesContext);
 
-  const InvoicesNum = invoices.length;
+  const [filterableArray, setFilterableArray] = useState(invoices);
 
-  let filterableArray = invoices
+  const InvoicesNum = filterableArray.length;
 
   const [filter, setFilter] = useState(false);
 
@@ -30,26 +30,24 @@ const Home = () => {
       (invoice) => invoice.invPending === true
     );
 
-    // filterableArray = pendingInvoices
-    console.log(pendingInvoices);
-    toggleFilter()
+    setFilterableArray(pendingInvoices);
+    toggleFilter();
   };
 
   const handlePaidFilter = () => {
-    const paidInvoices = invoices.filter((invoice) => invoice.invPending === false);
+    const paidInvoices = invoices.filter(
+      (invoice) => invoice.invPending === false
+    );
 
-    // filterableArray = paidInvoices
-    console.log(paidInvoices);
-    toggleFilter()
+    setFilterableArray(paidInvoices);
+    toggleFilter();
   };
 
   const handleAll = () => {
-    filterableArray = invoices
-    // console.log(invoices);
-    toggleFilter()
+    setFilterableArray(invoices);
+    toggleFilter();
   };
 
-  console.log(filterableArray);
   return (
     <HomeWrapper>
       <div className="home-nav">
@@ -89,8 +87,8 @@ const Home = () => {
       </div>
 
       <div className="invoice-item">
-        {!_.isEmpty(invoices) ? (
-          invoices.map((invoice) => (
+        {!_.isEmpty(filterableArray) ? (
+          filterableArray.map((invoice) => (
             <InvoiceCard key={invoice.id} {...invoice} />
           ))
         ) : (

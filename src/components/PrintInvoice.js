@@ -55,7 +55,7 @@ const PrintInvoice = () => {
         <div className="info">
           <div className="first">
             <div>
-              <h5>{getInvoice.billerName}</h5>
+              <h4>{getInvoice.billerName}</h4>
               <p>{getInvoice.billerStreet}</p>
               <p>{getInvoice.billerCity}</p>
               <p>{getInvoice.billerCountry}</p>
@@ -104,14 +104,14 @@ const PrintInvoice = () => {
           <div className="third">
             <p>
               SUBTOTAL:{' '}
-              <span className="sub-total">£{getInvoice.invTotal}</span>
+              <span className="sub-total">{getInvoice.currency} {getInvoice.invTotal}</span>
             </p>
             <p>
               DISCOUNT: <span>0</span>
             </p>
             <p>
               BALANCE DUE:{' '}
-              <span className="bal-due">£{getInvoice.invTotal}</span>
+              <span className="bal-due">{getInvoice.currency} {getInvoice.invTotal}</span>
             </p>
           </div>
 
